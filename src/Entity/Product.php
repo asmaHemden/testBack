@@ -3,8 +3,10 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+
 /**
- * @ORM\Entity(repositoryClass="App\Repository\ProductRepository")
+ * Product
+ *@ORM\Entity(repositoryClass="App\Repository\ProductRepository")
  */
 class Product
 {
@@ -72,6 +74,15 @@ class Product
      * @ORM\Column(name="productName", type="string", length=29, nullable=true)
      */
     private $productname;
+    /**
+     * @var \Review
+     *
+     * @ORM\ManyToOne(targetEntity="Review")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn( referencedColumnName="id")
+     * })
+     */
+    private $reviews;
 
     /**
      * @return int
@@ -215,6 +226,22 @@ class Product
     public function setProductname(?string $productname): void
     {
         $this->productname = $productname;
+    }
+
+    /**
+     * @return \Review
+     */
+    public function getReviews()
+    {
+        return $this->reviews;
+    }
+
+    /**
+     * @param \Review $reviews
+     */
+    public function setReviews( $reviews): void
+    {
+        $this->reviews = $reviews;
     }
 
 
